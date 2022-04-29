@@ -28,8 +28,14 @@ export default function Book({
     useCallback((): React.MouseEventHandler<HTMLButtonElement> => {
       return async () => {
         try {
+          if (inputOnEdit.name === name && inputOnEdit.author === author) {
+            // make sure we don't write to database
+            // when both input fields are the same
+            // as the previous name and author
+            return;
+          }
+
           const bookRef = doc(db, 'books', id);
-          console.log(inputOnEdit.name + ' ' + inputOnEdit.author);
           await updateDoc(bookRef, {
             name: inputOnEdit.name,
             author: inputOnEdit.author,
