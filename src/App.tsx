@@ -4,11 +4,11 @@ import Book from './Book';
 import './App.css';
 
 import { initializeApp } from 'firebase/app';
+import { getFirestore, addDoc, collection } from 'firebase/firestore';
 
-interface Book {
+interface IBook {
   name: string;
   author: string;
-  id: string;
 }
 
 const app = initializeApp({
@@ -20,48 +20,91 @@ const app = initializeApp({
   appId: '1:594803049014:web:a0a59a8a8357a983e58e97',
 });
 
+const db = getFirestore(app);
+
 function App() {
-  const [library, setLibrary] = useState<Book[]>([
-    { name: '123', author: '1233', id: '1' },
-    { name: '321', author: '3211', id: '2' },
-    { name: '555', author: '5555', id: '3' },
-  ]);
+  const [library, setLibrary] = useState<IBook[]>([]);
 
-  const handleDelete = useCallback(
-    (id: string): React.MouseEventHandler<HTMLButtonElement> => {
-      return () => {
-        setLibrary(
-          library.filter((book) => {
-            if (book.id === id) {
-              return false;
-            }
+  const [newBookInput, setNewBookInput] = useState<IBook>({
+    name: '',
+    author: '',
+  });
 
-            return true;
-          }),
-        );
+  //   const handleBookDelete = useCallback(
+  //   (id: string): React.MouseEventHandler<HTMLButtonElement> => {
+  //     return () => {
+  //       setLibrary(
+  //         library.filter((book) => {
+  //           if (book.id === id) {
+  //             return false;
+  //           }
+
+  //           return true;
+  //         }),
+  //       );
+  //     };
+  //   },
+  //   [library],
+  // );
+
+  const handleBookAdd = useCallback(
+    (
+      bookName: string,
+      bookAuthor: string,
+    ): React.MouseEventHandler<HTMLButtonElement> => {
+      return async (e) => {
+        try {
+          e.preventDefault();
+          await addDoc(collection(db, 'books'), {
+            name: bookName,
+            author: bookAuthor,
+          });
+        } catch (err) {
+          console.log(err);
+        }
       };
     },
-    [library],
+    [],
   );
+
+  const handleNewBookInputChange: React.ChangeEventHandler<
+    HTMLInputElement
+  > = (e) => {
+    setNewBookInput({ ...newBookInput, [e.target.name]: e.target.value });
+  };
 
   return (
     <div className="App">
       <div className="c-books">
         {library.map((book) => (
           <Book
-            onDelete={handleDelete(book.id)}
+            onDelete={() => {}}
             name={book.name}
             author={book.author}
-            key={book.id}
           />
         ))}
       </div>
       <form className="c-form">
         <label htmlFor="name">Name</label>
-        <input className="c-form__input" id="name" name="name"></input>
+        <input
+          className="c-form__input"
+          id="name"
+          name="name"
+          onChange={handleNewBookInputChange}
+        ></input>
         <label htmlFor="author">Author</label>
-        <input className="c-form__input" id="author" name="author"></input>
-        <button className="c-form__submit">Add book</button>
+        <input
+          className="c-form__input"
+          id="author"
+          name="author"
+          onChange={handleNewBookInputChange}
+        ></input>
+        <button
+          className="c-form__submit"
+          onClick={handleBookAdd(newBookInput.name, newBookInput.author)}
+        >
+          Add book
+        </button>
       </form>
     </div>
   );
