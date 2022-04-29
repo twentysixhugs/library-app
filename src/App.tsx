@@ -3,11 +3,22 @@ import { useState, useEffect, useCallback } from 'react';
 import Book from './Book';
 import './App.css';
 
+import { initializeApp } from 'firebase/app';
+
 interface Book {
   name: string;
   author: string;
   id: string;
 }
+
+const app = initializeApp({
+  apiKey: 'AIzaSyAzOSpDwCvzw3uV0DpdTzJUImXvfz2tp0M',
+  authDomain: 'newlibrary-5811a.firebaseapp.com',
+  projectId: 'newlibrary-5811a',
+  storageBucket: 'newlibrary-5811a.appspot.com',
+  messagingSenderId: '594803049014',
+  appId: '1:594803049014:web:a0a59a8a8357a983e58e97',
+});
 
 function App() {
   const [library, setLibrary] = useState<Book[]>([
