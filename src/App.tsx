@@ -14,7 +14,7 @@ import {
   query,
 } from 'firebase/firestore';
 
-interface IBook {
+export interface IBook {
   name: string;
   author: string;
 }
@@ -28,7 +28,7 @@ const app = initializeApp({
   appId: '1:594803049014:web:a0a59a8a8357a983e58e97',
 });
 
-const db = getFirestore(app);
+export const db = getFirestore(app);
 
 function App() {
   const booksQuery = query(collection(db, 'books'));
@@ -39,10 +39,17 @@ function App() {
     author: '',
   });
 
+  const [isEditingAnyBook, setIsEditingAnyBook] = useState(false);
+
   const handleBookDelete = useCallback(
     (id: string): React.MouseEventHandler<HTMLButtonElement> => {
       return async () => {
-        deleteDoc(doc(db, 'books', id));
+        try {
+          deleteDoc(doc(db, 'books', id));
+        } catch (err) {
+          console.log(err);
+          alert('An error occured when deleting book');
+        }
       };
     },
     [],
@@ -62,6 +69,7 @@ function App() {
           });
         } catch (err) {
           console.log(err);
+          alert('An error occured when adding book');
         }
       };
     },
@@ -72,6 +80,10 @@ function App() {
     HTMLInputElement
   > = (e) => {
     setNewBookInput({ ...newBookInput, [e.target.name]: e.target.value });
+  };
+
+  const toggleBookEditMode = function () {
+    setIsEditingAnyBook(!isEditingAnyBook);
   };
 
   return (
@@ -85,33 +97,39 @@ function App() {
                 name={bookData.name}
                 author={bookData.author}
                 onDelete={handleBookDelete(doc.id)}
+                onEdit={toggleBookEditMode}
                 key={doc.id}
+                id={doc.id}
               />
             );
           })}
       </div>
-      <form className="c-form">
-        <label htmlFor="name">Name</label>
-        <input
-          className="c-form__input"
-          id="name"
-          name="name"
-          onChange={handleNewBookInputChange}
-        ></input>
-        <label htmlFor="author">Author</label>
-        <input
-          className="c-form__input"
-          id="author"
-          name="author"
-          onChange={handleNewBookInputChange}
-        ></input>
-        <button
-          className="c-form__submit"
-          onClick={handleBookAdd(newBookInput.name, newBookInput.author)}
-        >
-          Add book
-        </button>
-      </form>
+      {isEditingAnyBook || (
+        <form className="c-form">
+          <label htmlFor="name">Name</label>
+          <input
+            className="c-form__input"
+            id="name"
+            name="name"
+            value={newBookInput.name}
+            onChange={handleNewBookInputChange}
+          ></input>
+          <label htmlFor="author">Author</label>
+          <input
+            className="c-form__input"
+            id="author"
+            name="author"
+            value={newBookInput.author}
+            onChange={handleNewBookInputChange}
+          ></input>
+          <button
+            className="c-form__submit"
+            onClick={handleBookAdd(newBookInput.name, newBookInput.author)}
+          >
+            Add book
+          </button>
+        </form>
+      )}
     </div>
   );
 }
