@@ -1,10 +1,18 @@
 import React from 'react';
 import { useState, useEffect, useCallback } from 'react';
+import { useCollection } from 'react-firebase-hooks/firestore';
 import Book from './Book';
 import './App.css';
 
 import { initializeApp } from 'firebase/app';
-import { getFirestore, addDoc, collection } from 'firebase/firestore';
+import {
+  getFirestore,
+  addDoc,
+  collection,
+  query,
+  onSnapshot,
+  getDocs,
+} from 'firebase/firestore';
 
 interface IBook {
   name: string;
@@ -23,7 +31,8 @@ const app = initializeApp({
 const db = getFirestore(app);
 
 function App() {
-  const [library, setLibrary] = useState<IBook[]>([]);
+  const booksQuery = query(collection(db, 'books'));
+  const [booksSnapshot] = useCollection(booksQuery);
 
   const [newBookInput, setNewBookInput] = useState<IBook>({
     name: '',
@@ -76,13 +85,18 @@ function App() {
   return (
     <div className="App">
       <div className="c-books">
-        {library.map((book) => (
-          <Book
-            onDelete={() => {}}
-            name={book.name}
-            author={book.author}
-          />
-        ))}
+        {booksSnapshot &&
+          booksSnapshot.docs.map((doc) => {
+            const bookData = doc.data();
+            return (
+              <Book
+                name={bookData.name}
+                author={bookData.author}
+                onDelete={() => {}}
+                key={doc.id}
+              />
+            );
+          })}
       </div>
       <form className="c-form">
         <label htmlFor="name">Name</label>
