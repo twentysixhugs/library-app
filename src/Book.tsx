@@ -1,5 +1,5 @@
 import { doc, updateDoc } from 'firebase/firestore';
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { db } from './App';
 import { IBook } from './App';
 

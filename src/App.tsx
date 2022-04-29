@@ -61,6 +61,8 @@ function App() {
       bookAuthor: string,
     ): React.MouseEventHandler<HTMLButtonElement> => {
       return async (e) => {
+        setNewBookInput({ name: '', author: '' });
+
         try {
           e.preventDefault();
           await addDoc(collection(db, 'books'), {
