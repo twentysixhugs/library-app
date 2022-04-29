@@ -1,19 +1,19 @@
-import React from 'react';
-import Book from './components/Book';
 import NewBookForm from './components/NewBookForm';
+import Library from './components/Library';
+
 import { useState } from 'react';
-import { useCollection } from 'react-firebase-hooks/firestore';
-import './App.css';
 
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, query } from 'firebase/firestore';
+import { getFirestore } from 'firebase/firestore';
+
+import './App.css';
 
 export interface IBook {
   name: string;
   author: string;
 }
 
-const app = initializeApp({
+const firebaseApp = initializeApp({
   apiKey: 'AIzaSyAzOSpDwCvzw3uV0DpdTzJUImXvfz2tp0M',
   authDomain: 'newlibrary-5811a.firebaseapp.com',
   projectId: 'newlibrary-5811a',
@@ -22,12 +22,9 @@ const app = initializeApp({
   appId: '1:594803049014:web:a0a59a8a8357a983e58e97',
 });
 
-export const db = getFirestore(app);
+export const db = getFirestore(firebaseApp);
 
 function App() {
-  const booksQuery = query(collection(db, 'books'));
-  const [booksSnapshot] = useCollection(booksQuery);
-
   const [isEditingAnyBook, setIsEditingAnyBook] = useState(false);
 
   const toggleBookEditMode = function () {
@@ -36,21 +33,7 @@ function App() {
 
   return (
     <div className="App">
-      <div className="c-library">
-        {booksSnapshot &&
-          booksSnapshot.docs.map((doc) => {
-            const bookData = doc.data();
-            return (
-              <Book
-                name={bookData.name}
-                author={bookData.author}
-                onEdit={toggleBookEditMode}
-                key={doc.id}
-                id={doc.id}
-              />
-            );
-          })}
-      </div>
+      <Library onBookEdit={toggleBookEditMode} />
       {isEditingAnyBook || <NewBookForm />}
     </div>
   );
