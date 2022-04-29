@@ -1,7 +1,7 @@
 import React from 'react';
+import Book from './components/Book';
 import { useState, useEffect, useCallback } from 'react';
 import { useCollection } from 'react-firebase-hooks/firestore';
-import Book from './Book';
 import './App.css';
 
 import { initializeApp } from 'firebase/app';
@@ -40,20 +40,6 @@ function App() {
   });
 
   const [isEditingAnyBook, setIsEditingAnyBook] = useState(false);
-
-  const handleBookDelete = useCallback(
-    (id: string): React.MouseEventHandler<HTMLButtonElement> => {
-      return async () => {
-        try {
-          deleteDoc(doc(db, 'books', id));
-        } catch (err) {
-          console.log(err);
-          alert('An error occured when deleting book');
-        }
-      };
-    },
-    [],
-  );
 
   const handleBookAdd = useCallback(
     (
@@ -98,7 +84,6 @@ function App() {
               <Book
                 name={bookData.name}
                 author={bookData.author}
-                onDelete={handleBookDelete(doc.id)}
                 onEdit={toggleBookEditMode}
                 key={doc.id}
                 id={doc.id}

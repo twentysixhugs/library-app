@@ -1,19 +1,17 @@
-import { doc, updateDoc } from 'firebase/firestore';
+import { doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { useState, useCallback } from 'react';
-import { db } from './App';
-import { IBook } from './App';
+import { db } from '../App';
+import { IBook } from '../App';
 
 export default function Book({
   name,
   author,
   id,
-  onDelete,
   onEdit,
 }: {
   name: string;
   author: string;
   id: string;
-  onDelete: React.MouseEventHandler<HTMLButtonElement>;
   onEdit: () => void;
 }) {
   const [isEdited, setIsEdited] = useState(false);
@@ -53,14 +51,19 @@ export default function Book({
   };
 
   const handleDelete: React.MouseEventHandler<HTMLButtonElement> =
-    function (e) {
+    async function () {
       if (isEdited) {
         /* Make sure the app will not remain in edit mode 
         if the book is suddenly deleted by the user */
         toggleEditMode();
       }
 
-      onDelete(e);
+      try {
+        deleteDoc(doc(db, 'books', id));
+      } catch (err) {
+        console.log(err);
+        alert('An error occured when deleting book');
+      }
     };
 
   return (
