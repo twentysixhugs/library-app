@@ -8,10 +8,10 @@ import { initializeApp } from 'firebase/app';
 import {
   getFirestore,
   addDoc,
+  deleteDoc,
+  doc,
   collection,
   query,
-  onSnapshot,
-  getDocs,
 } from 'firebase/firestore';
 
 interface IBook {
@@ -39,22 +39,14 @@ function App() {
     author: '',
   });
 
-  //   const handleBookDelete = useCallback(
-  //   (id: string): React.MouseEventHandler<HTMLButtonElement> => {
-  //     return () => {
-  //       setLibrary(
-  //         library.filter((book) => {
-  //           if (book.id === id) {
-  //             return false;
-  //           }
-
-  //           return true;
-  //         }),
-  //       );
-  //     };
-  //   },
-  //   [library],
-  // );
+  const handleBookDelete = useCallback(
+    (id: string): React.MouseEventHandler<HTMLButtonElement> => {
+      return async () => {
+        deleteDoc(doc(db, 'books', id));
+      };
+    },
+    [],
+  );
 
   const handleBookAdd = useCallback(
     (
@@ -92,7 +84,7 @@ function App() {
               <Book
                 name={bookData.name}
                 author={bookData.author}
-                onDelete={() => {}}
+                onDelete={handleBookDelete(doc.id)}
                 key={doc.id}
               />
             );
