@@ -13,7 +13,8 @@ export default function Library({
   user: User;
 }) {
   const booksQuery = query(collection(db, `${user.uid}`));
-  const [booksSnapshot] = useCollection(booksQuery);
+  const [booksSnapshot, loading, error] = useCollection(booksQuery);
+
   return (
     <div className="c-library">
       {booksSnapshot &&
@@ -30,6 +31,11 @@ export default function Library({
             />
           );
         })}
+      {error && (
+        <div className="c-library c-library--error">
+          Something went wrong when reading data
+        </div>
+      )}
     </div>
   );
 }
