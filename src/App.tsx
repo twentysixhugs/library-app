@@ -48,7 +48,6 @@ function App() {
           <UserAuth auth={auth} user={user} />
         </div>
       )}
-      {JSON.stringify(user)}
     </div>
   );
 }
