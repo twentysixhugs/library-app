@@ -1,8 +1,8 @@
 import { User } from 'firebase/auth';
 import { doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { useState } from 'react';
-import { db } from '../App';
-import { IBook } from '../App';
+import { db } from '../../App';
+import { IBook } from '../../App';
 
 export default function Book({
   name,

@@ -1,6 +1,6 @@
-import NewBookForm from './components/NewBookForm';
-import Library from './components/Library';
-import UserAuth from './components/UserAuth';
+import NewBookForm from './components/NewBookForm/NewBookForm';
+import Library from './components/Library/Library';
+import UserAuth from './components/UserAuth/UserAuth';
 
 import { useState } from 'react';
 import { useAuth } from './hooks/useAuth';

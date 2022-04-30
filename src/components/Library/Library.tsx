@@ -1,8 +1,8 @@
-import Book from './Book';
+import Book from '../Book/Book';
 
 import { query, collection } from 'firebase/firestore';
 import { useCollection } from 'react-firebase-hooks/firestore';
-import { db } from '../App';
+import { db } from '../../App';
 import { User } from 'firebase/auth';
 
 export default function Library({

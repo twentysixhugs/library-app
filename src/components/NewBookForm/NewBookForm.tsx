@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useCallback } from 'react';
-import { IBook } from '../App';
-import { db } from '../App';
+import { IBook } from '../../App';
+import { db } from '../../App';
 import { addDoc, collection } from 'firebase/firestore';
 import { User } from 'firebase/auth';
 
