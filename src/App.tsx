@@ -1,10 +1,13 @@
 import NewBookForm from './components/NewBookForm';
 import Library from './components/Library';
+import UserAuth from './components/UserAuth';
 
 import { useState } from 'react';
+import { useAuth } from './hooks/useAuth';
 
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
+import 'firebase/auth';
 
 import './App.css';
 
@@ -26,6 +29,7 @@ export const db = getFirestore(firebaseApp);
 
 function App() {
   const [isEditingAnyBook, setIsEditingAnyBook] = useState(false);
+  const { user, auth } = useAuth();
 
   const toggleBookEditMode = function () {
     setIsEditingAnyBook(!isEditingAnyBook);
@@ -33,8 +37,18 @@ function App() {
 
   return (
     <div className="App">
-      <Library onBookEdit={toggleBookEditMode} />
-      {isEditingAnyBook || <NewBookForm />}
+      {!!user ? (
+        <div className="container">
+          <Library user={user} onBookEdit={toggleBookEditMode} />
+          {isEditingAnyBook || <NewBookForm user={user} />}
+          <UserAuth auth={auth} user={user} />
+        </div>
+      ) : (
+        <div className="container">
+          <UserAuth auth={auth} user={user} />
+        </div>
+      )}
+      {JSON.stringify(user)}
     </div>
   );
 }

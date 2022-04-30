@@ -1,5 +1,6 @@
+import { User } from 'firebase/auth';
 import { doc, updateDoc, deleteDoc } from 'firebase/firestore';
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { db } from '../App';
 import { IBook } from '../App';
 
@@ -8,11 +9,13 @@ export default function Book({
   author,
   id,
   onEdit,
+  user,
 }: {
   name: string;
   author: string;
   id: string;
   onEdit: () => void;
+  user: User;
 }) {
   const [isEdited, setIsEdited] = useState(false);
   const [inputOnEdit, setInputOnEdit] = useState<IBook>({ name, author });
@@ -22,28 +25,27 @@ export default function Book({
       setInputOnEdit({ ...inputOnEdit, [e.target.name]: e.target.value });
     };
 
-  const handleEditSubmit =
-    useCallback((): React.MouseEventHandler<HTMLButtonElement> => {
-      return async () => {
-        try {
-          if (inputOnEdit.name === name && inputOnEdit.author === author) {
-            // make sure we don't write to database
-            // when both input fields are the same
-            // as the previous name and author
-            return;
-          }
+  const handleEditSubmit: React.MouseEventHandler<
+    HTMLButtonElement
+  > = async () => {
+    try {
+      if (inputOnEdit.name === name && inputOnEdit.author === author) {
+        // make sure we don't write to database
+        // when both input fields are the same
+        // as the previous name and author
+        return;
+      }
 
-          const bookRef = doc(db, 'books', id);
-          await updateDoc(bookRef, {
-            name: inputOnEdit.name,
-            author: inputOnEdit.author,
-          });
-        } catch (err) {
-        } finally {
-          toggleEditMode();
-        }
-      };
-    }, [isEdited, inputOnEdit]);
+      const bookRef = doc(db, `${user.uid}`, id);
+      await updateDoc(bookRef, {
+        name: inputOnEdit.name,
+        author: inputOnEdit.author,
+      });
+    } catch (err) {
+    } finally {
+      toggleEditMode();
+    }
+  };
 
   const toggleEditMode = function () {
     onEdit(); // signal to app's ui that edit mode has been toggled
@@ -59,7 +61,7 @@ export default function Book({
       }
 
       try {
-        deleteDoc(doc(db, 'books', id));
+        deleteDoc(doc(db, `${user.uid}`, id));
       } catch (err) {
         console.log(err);
         alert('An error occured when deleting book');
@@ -99,10 +101,7 @@ export default function Book({
         Delete
       </button>
       {isEdited ? (
-        <button
-          className="c-book__edit-submit"
-          onClick={handleEditSubmit()}
-        >
+        <button className="c-book__edit-submit" onClick={handleEditSubmit}>
           Done
         </button>
       ) : (

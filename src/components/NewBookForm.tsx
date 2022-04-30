@@ -3,8 +3,9 @@ import { useState, useCallback } from 'react';
 import { IBook } from '../App';
 import { db } from '../App';
 import { addDoc, collection } from 'firebase/firestore';
+import { User } from 'firebase/auth';
 
-export default function NewBookForm() {
+export default function NewBookForm({ user }: { user: User }) {
   const [newBookInput, setNewBookInput] = useState<IBook>({
     name: '',
     author: '',
@@ -26,7 +27,7 @@ export default function NewBookForm() {
 
         try {
           e.preventDefault();
-          await addDoc(collection(db, 'books'), {
+          await addDoc(collection(db, `${user.uid}`), {
             name: bookName,
             author: bookAuthor,
           });
@@ -36,7 +37,7 @@ export default function NewBookForm() {
         }
       };
     },
-    [],
+    [user.uid],
   );
 
   return (
