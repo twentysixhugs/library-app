@@ -42,6 +42,8 @@ export default function Book({
         author: inputOnEdit.author,
       });
     } catch (err) {
+      alert('An error occured when editing the book');
+      setInputOnEdit({ name, author });
     } finally {
       toggleEditMode();
     }
@@ -61,10 +63,10 @@ export default function Book({
       }
 
       try {
-        deleteDoc(doc(db, `${user.uid}`, id));
+        await deleteDoc(doc(db, `${user.uid}`, id));
       } catch (err) {
         console.log(err);
-        alert('An error occured when deleting book');
+        alert('An error occured when deleting the book');
       }
     };
 
