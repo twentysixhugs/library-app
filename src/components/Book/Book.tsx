@@ -8,14 +8,14 @@ export default function Book({
   name,
   author,
   id,
+  userId,
   onEdit,
-  user,
 }: {
   name: string;
   author: string;
   id: string;
+  userId: string;
   onEdit: () => void;
-  user: User;
 }) {
   const [isEdited, setIsEdited] = useState(false);
   const [inputOnEdit, setInputOnEdit] = useState<IBook>({ name, author });
@@ -36,7 +36,7 @@ export default function Book({
         return;
       }
 
-      const bookRef = doc(db, `${user.uid}`, id);
+      const bookRef = doc(db, userId, id);
       await updateDoc(bookRef, {
         name: inputOnEdit.name,
         author: inputOnEdit.author,
@@ -63,7 +63,7 @@ export default function Book({
       }
 
       try {
-        await deleteDoc(doc(db, `${user.uid}`, id));
+        await deleteDoc(doc(db, userId, id));
       } catch (err) {
         console.log(err);
         alert('An error occured when deleting the book');
