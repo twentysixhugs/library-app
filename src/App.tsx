@@ -39,7 +39,7 @@ function App() {
     <div className="App">
       {!!user ? (
         <div className="container">
-          <Library user={user} onBookEdit={toggleBookEditMode} />
+          <Library userId={user.uid} onBookEdit={toggleBookEditMode} />
           {isEditingAnyBook || <NewBookForm user={user} />}
           <UserAuth auth={auth} user={user} />
         </div>
