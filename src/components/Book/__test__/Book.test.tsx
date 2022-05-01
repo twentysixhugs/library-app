@@ -111,4 +111,27 @@ describe('Book data manipulation calls', () => {
       screen.queryByLabelText(/name/i),
     );
   });
+
+  it('should hide input controls after editing', async () => {
+    render(
+      <Book
+        name={'testname'}
+        author={mockString}
+        onEdit={onEdit}
+        id={mockString}
+        userId={mockString}
+      />,
+    );
+
+    userEvent.click(screen.getByRole('button', { name: /edit/i }));
+    const input = screen.getByLabelText(/name/i);
+    userEvent.type(input, 'test');
+    userEvent.click(screen.getByRole('button', { name: /done/i }));
+
+    await waitForElementToBeRemoved(() =>
+      screen.queryByLabelText(/name/i),
+    );
+
+    expect(input).not.toBeInTheDocument();
+  });
 });
