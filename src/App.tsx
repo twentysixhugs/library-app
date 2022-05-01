@@ -40,7 +40,7 @@ function App() {
       {!!user ? (
         <div className="container">
           <Library userId={user.uid} onBookEdit={toggleBookEditMode} />
-          {isEditingAnyBook || <NewBookForm user={user} />}
+          {isEditingAnyBook || <NewBookForm userId={user.uid} />}
           <UserAuth auth={auth} user={user} />
         </div>
       ) : (
