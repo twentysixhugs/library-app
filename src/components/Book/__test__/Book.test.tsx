@@ -10,11 +10,7 @@ jest.mock('firebase/firestore', () => ({
   doc: jest.fn(),
   updateDoc: jest.fn(),
   deleteDoc: jest.fn(),
-}));
-
-jest.mock('../../../App', () => ({
-  __esModule: true,
-  db: {},
+  getFirestore: jest.fn(),
 }));
 
 beforeEach(() => {
