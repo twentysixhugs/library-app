@@ -13,6 +13,8 @@ export default function Library({
   userId: string;
 }) {
   const booksQuery = query(collection(db, userId));
+
+  //eslint-disable-next-line
   const [booksSnapshot, loading, error] = useCollection(booksQuery);
 
   return (
