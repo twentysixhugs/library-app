@@ -74,13 +74,16 @@ export default function Book({
     <div className="c-book">
       {isEdited ? (
         <div className="c-book__input-wrapper">
-          <label htmlFor="name"></label>
+          <label id="name-label" htmlFor="name">
+            Name:{' '}
+          </label>
           <input
             className="c-book__input"
             name="name"
             id="name"
             value={inputOnEdit.name}
             onChange={handleChange}
+            aria-labelledby="name-label"
           ></input>
         </div>
       ) : (
@@ -88,12 +91,16 @@ export default function Book({
       )}
       {isEdited ? (
         <div className="c-book__input-wrapper">
+          <label id="author-label" htmlFor="author">
+            Author:{' '}
+          </label>
           <input
             className="c-book__input"
             name="author"
             id="author"
             value={inputOnEdit.author}
             onChange={handleChange}
+            aria-labelledby="author-label"
           ></input>
         </div>
       ) : (
