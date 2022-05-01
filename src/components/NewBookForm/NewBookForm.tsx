@@ -41,21 +41,27 @@ export default function NewBookForm({ userId }: { userId: string }) {
 
   return (
     <form className="c-form">
-      <label htmlFor="name">Name</label>
+      <label id="c-form__name-label" htmlFor="name">
+        Name
+      </label>
       <input
         className="c-form__input"
         id="name"
         name="name"
         value={newBookInput.name}
         onChange={handleInputChange}
+        aria-labelledby="c-form__name-label"
       ></input>
-      <label htmlFor="author">Author</label>
+      <label id="c-form__author-label" htmlFor="author">
+        Author
+      </label>
       <input
         className="c-form__input"
         id="author"
         name="author"
         value={newBookInput.author}
         onChange={handleInputChange}
+        aria-labelledby="c-form__author-label"
       ></input>
       <button
         className="c-form__submit"
