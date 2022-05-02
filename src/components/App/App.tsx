@@ -29,6 +29,7 @@ export const db = getFirestore(firebaseApp);
 const auth = getAuth();
 
 function App() {
+  //eslint-disable-next-line
   const [user, loading, error] = useAuthState(auth);
 
   return (
