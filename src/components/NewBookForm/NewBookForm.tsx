@@ -3,6 +3,7 @@ import { useState, useCallback } from 'react';
 import { IBook } from '../App/App';
 import { db } from '../App/App';
 import { addDoc, collection } from 'firebase/firestore';
+import './NewBookForm.css';
 
 export default function NewBookForm({ userId }: { userId: string }) {
   const [newBookInput, setNewBookInput] = useState<IBook>({
@@ -68,7 +69,7 @@ export default function NewBookForm({ userId }: { userId: string }) {
         className="c-form__submit"
         onClick={handleBookAdd(newBookInput.name, newBookInput.author)}
       >
-        Add book
+        Add
       </button>
     </form>
   );

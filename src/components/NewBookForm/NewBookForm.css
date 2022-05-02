@@ -1,0 +1,14 @@
+.c-form {
+  display: flex;
+  flex-flow: column;
+}
+
+.c-form__input {
+  border: 1px solid black;
+}
+
+.c-form__submit {
+  width: max-content;
+  padding: 5px;
+  align-self: flex-end;
+}
