@@ -41,6 +41,7 @@ export default function NewBookForm({ userId }: { userId: string }) {
 
   return (
     <form className="c-form">
+      <h1 className="c-form__heading">New book</h1>
       <label id="c-form__name-label" htmlFor="name">
         Name
       </label>
