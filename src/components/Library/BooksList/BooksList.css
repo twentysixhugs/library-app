@@ -1,5 +1,5 @@
 .c-books-list {
-  --book-min-height: 200px;
+  --book-min-height: 220px;
   --book-min-width: 300px;
   margin-top: 20px;
   display: grid;
@@ -8,4 +8,10 @@
     minmax(var(--book-min-width), 1fr)
   );
   gap: 2rem;
+}
+
+@media (max-width: 500px) {
+  .c-books-list {
+    --book-min-width: 200px;
+  }
 }
