@@ -40,7 +40,7 @@ function App() {
     <div className="App">
       {!!user ? (
         <>
-          <Header>
+          <Header shouldShowInterface={true}>
             {isEditingAnyBook || <NewBookForm userId={user.uid} />}
             <UserAuth
               auth={auth}
@@ -54,7 +54,11 @@ function App() {
         </>
       ) : (
         <>
-          <Header>Welcome!</Header>
+          <Header shouldShowInterface={false}>
+            <span className="c-header__welcome">
+              Welcome! Please, sign in to start working with the library
+            </span>
+          </Header>
           <div className="wrapper wrapper--app">
             <UserAuth
               auth={auth}
