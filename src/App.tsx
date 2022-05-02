@@ -42,7 +42,11 @@ function App() {
         <>
           <Header>
             {isEditingAnyBook || <NewBookForm userId={user.uid} />}
-            <UserAuth auth={auth} user={user} />
+            <UserAuth
+              auth={auth}
+              user={user}
+              shouldRenderUserInfo={true}
+            />
           </Header>
           <div className="wrapper wrapper--app">
             <Library userId={user.uid} onBookEdit={toggleBookEditMode} />
@@ -52,7 +56,11 @@ function App() {
         <>
           <Header>Welcome!</Header>
           <div className="wrapper wrapper--app">
-            <UserAuth auth={auth} user={user} />
+            <UserAuth
+              auth={auth}
+              user={user}
+              shouldRenderUserInfo={false}
+            />
           </div>
         </>
       )}
