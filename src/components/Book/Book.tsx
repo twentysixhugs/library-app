@@ -1,7 +1,7 @@
 import { doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { useState } from 'react';
-import { db } from '../../App';
-import { IBook } from '../../App';
+import { db } from '../App/App';
+import { IBook } from '../App/App';
 
 export default function Book({
   name,

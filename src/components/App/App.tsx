@@ -1,16 +1,16 @@
-import NewBookForm from './components/NewBookForm/NewBookForm';
-import Library from './components/Library/Library';
-import UserAuth from './components/UserAuth/UserAuth';
+import NewBookForm from '../NewBookForm/NewBookForm';
+import Library from '../Library/Library';
+import UserAuth from '../UserAuth/UserAuth';
 
 import { useState } from 'react';
-import { useAuth } from './hooks/useAuth';
+import { useAuth } from '../../hooks/useAuth';
 
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import 'firebase/auth';
 
 import './App.css';
-import Header from './components/Header/Header';
+import Header from '../Header/Header';
 
 export interface IBook {
   name: string;

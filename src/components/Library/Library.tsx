@@ -3,7 +3,7 @@ import BooksList from './BooksList/BooksList';
 
 import { query, collection } from 'firebase/firestore';
 import { useCollection } from 'react-firebase-hooks/firestore';
-import { db } from '../../App';
+import { db } from '../App/App';
 
 export default function Library({
   onBookEdit,
