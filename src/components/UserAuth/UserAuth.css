@@ -25,8 +25,23 @@
   width: max-content;
   padding: 10px;
 
-  border-radius: 4px;
-  background: rgb(224, 224, 224);
+  color: #fff;
+
+  border-radius: 6px;
+  background: rgb(68, 59, 58);
+}
+
+.c-user-auth__button--pulsate {
+  animation: authButtonPulsate 2s alternate infinite;
+}
+
+@keyframes authButtonPulsate {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
 }
 
 .wrapper--app .c-user-auth {
