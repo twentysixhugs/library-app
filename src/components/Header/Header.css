@@ -1,0 +1,6 @@
+.c-header {
+  min-height: 150px;
+  display: flex;
+  justify-content: space-between;
+  border: 2px solid black;
+}
