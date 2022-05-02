@@ -18,7 +18,11 @@ export default function Library({ userId }: { userId: string }) {
 
   return (
     <div className="c-library">
-      {booksSnapshot && <h1 className="c-library__heading">Your books</h1>}
+      {booksSnapshot && (
+        <h1 className="c-library__heading">
+          Your books<div className="c-library__heading-effect"></div>
+        </h1>
+      )}
       {booksSnapshot && (
         <BooksList>
           {booksSnapshot.docs.map((doc) => {

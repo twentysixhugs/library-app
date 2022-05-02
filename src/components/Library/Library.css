@@ -1,7 +1,29 @@
 .c-library {
   padding: 1rem;
+  padding-top: 1.5rem;
 }
 
 .c-library__heading {
+  position: relative;
   font-size: 2rem;
+}
+
+.c-library__heading-effect {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 30px;
+  height: 1px;
+  background: #000;
+  animation: libraryHeadingEffect 1s forwards;
+}
+
+@keyframes libraryHeadingEffect {
+  from {
+    width: 50px;
+  }
+  to {
+    width: 0px;
+    left: 170px;
+  }
 }
