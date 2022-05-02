@@ -6,6 +6,8 @@
 .c-library__heading {
   position: relative;
   font-size: 2rem;
+  font-weight: bold;
+  color: rgb(255, 145, 106);
 }
 
 .c-library__heading-effect {
