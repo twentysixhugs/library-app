@@ -1,7 +1,7 @@
 import Book from '../Book/Book';
 import BooksList from './BooksList/BooksList';
 
-import { query, collection } from 'firebase/firestore';
+import { query, collection, orderBy } from 'firebase/firestore';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { db } from '../App/App';
 
@@ -14,7 +14,10 @@ export default function Library({
   onBookEdit: () => void;
   userId: string;
 }) {
-  const booksQuery = query(collection(db, userId));
+  const booksQuery = query(
+    collection(db, userId),
+    orderBy('timestamp', 'desc'),
+  );
 
   //eslint-disable-next-line
   const [booksSnapshot, loading, error] = useCollection(booksQuery);

@@ -30,6 +30,7 @@ export default function NewBookForm({ userId }: { userId: string }) {
           await addDoc(collection(db, userId), {
             name: bookName,
             author: bookAuthor,
+            timestamp: new Date(),
           });
         } catch (err) {
           console.log(err);
