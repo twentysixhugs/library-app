@@ -10,6 +10,7 @@ import { getFirestore } from 'firebase/firestore';
 import 'firebase/auth';
 
 import './App.css';
+import Header from './components/Header/Header';
 
 export interface IBook {
   name: string;
@@ -38,15 +39,22 @@ function App() {
   return (
     <div className="App">
       {!!user ? (
-        <div className="container">
-          <Library userId={user.uid} onBookEdit={toggleBookEditMode} />
-          {isEditingAnyBook || <NewBookForm userId={user.uid} />}
-          <UserAuth auth={auth} user={user} />
-        </div>
+        <>
+          <Header>
+            {isEditingAnyBook || <NewBookForm userId={user.uid} />}
+            <UserAuth auth={auth} user={user} />
+          </Header>
+          <div className="wrapper wrapper--app">
+            <Library userId={user.uid} onBookEdit={toggleBookEditMode} />
+          </div>
+        </>
       ) : (
-        <div className="container">
-          <UserAuth auth={auth} user={user} />
-        </div>
+        <>
+          <Header>Welcome!</Header>
+          <div className="wrapper wrapper--app">
+            <UserAuth auth={auth} user={user} />
+          </div>
+        </>
       )}
     </div>
   );
