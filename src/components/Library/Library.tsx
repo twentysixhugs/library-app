@@ -5,6 +5,8 @@ import { query, collection } from 'firebase/firestore';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { db } from '../App/App';
 
+import './Library.css';
+
 export default function Library({
   onBookEdit,
   userId,
