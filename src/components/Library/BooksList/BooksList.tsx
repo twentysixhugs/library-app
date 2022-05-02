@@ -6,7 +6,6 @@ export default function BooksList({
 }: {
   children?: React.ReactNode[];
 }) {
-  console.log(children);
   return (
     <div className="c-books-list">
       {children && children.length === 0 ? (
