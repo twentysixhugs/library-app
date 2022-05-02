@@ -15,3 +15,11 @@ jest.mock('firebase/firestore', () => ({
   query: jest.fn(),
   orderBy: jest.fn(),
 }));
+
+jest.mock('firebase/auth', () => ({
+  __esModule: true,
+  getAuth: jest.fn().mockReturnValue({}),
+}));
+
+jest.mock('react-firebase-hooks/auth');
+jest.mock('react-firebase-hooks/firestore');

@@ -1,5 +1,6 @@
-import { Auth, User } from 'firebase/auth';
+import { Auth } from 'firebase/auth';
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { User } from 'firebase/auth';
 import './UserAuth.css';
 
 export default function UserAuth({
@@ -7,7 +8,7 @@ export default function UserAuth({
   auth,
   shouldRenderUserInfo,
 }: {
-  user: User | null;
+  user: User | null | undefined;
   auth: Auth;
   shouldRenderUserInfo: boolean;
 }) {
@@ -35,7 +36,12 @@ export default function UserAuth({
           )}
         </div>
       )}
-      <button onClick={handleClick} className="c-user-auth__button">
+      <button
+        onClick={handleClick}
+        className={`c-user-auth__button ${
+          user || 'c-user-auth__button--pulsate'
+        }`}
+      >
         {user ? 'Sign out' : 'Sign in'}
       </button>
     </div>

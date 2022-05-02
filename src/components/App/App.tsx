@@ -2,15 +2,13 @@ import NewBookForm from '../NewBookForm/NewBookForm';
 import Library from '../Library/Library';
 import UserAuth from '../UserAuth/UserAuth';
 
-import { useState } from 'react';
-import { useAuth } from '../../hooks/useAuth';
-
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
-import 'firebase/auth';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 import './App.css';
 import Header from '../Header/Header';
+import { getAuth } from 'firebase/auth';
 
 export interface IBook {
   name: string;
@@ -28,8 +26,10 @@ const firebaseApp = initializeApp({
 
 export const db = getFirestore(firebaseApp);
 
+const auth = getAuth();
+
 function App() {
-  const { user, auth } = useAuth();
+  const [user, loading, error] = useAuthState(auth);
 
   return (
     <div className="App">
@@ -51,15 +51,19 @@ function App() {
         <>
           <Header shouldShowInterface={false}>
             <span className="c-header__welcome">
-              Welcome! Please, sign in to start working with the library
+              {loading
+                ? 'Loading...'
+                : 'Welcome! Please, sign in to start working with the library'}
             </span>
           </Header>
           <div className="wrapper wrapper--app">
-            <UserAuth
-              auth={auth}
-              user={user}
-              shouldRenderUserInfo={false}
-            />
+            {!loading && (
+              <UserAuth
+                auth={auth}
+                user={user}
+                shouldRenderUserInfo={false}
+              />
+            )}
           </div>
         </>
       )}
