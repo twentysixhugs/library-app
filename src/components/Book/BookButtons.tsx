@@ -15,7 +15,7 @@ export default function BookButtons({
     <div className="c-book-buttons">
       {isEdited ? (
         <button
-          className="c-book__edit-submit"
+          className="c-book-buttons__btn c-book-buttons__btn--submit"
           onClick={onEditDone}
           aria-label="done editing and submit"
         >
@@ -23,7 +23,7 @@ export default function BookButtons({
         </button>
       ) : (
         <button
-          className="c-book__edit"
+          className="c-book-buttons__btn c-book-buttons__btn--edit"
           onClick={onEdit}
           aria-label="edit book"
         >
@@ -31,7 +31,7 @@ export default function BookButtons({
         </button>
       )}
       <button
-        className="c-book__delete"
+        className="c-book-buttons__btn c-book-buttons__btn--delete"
         onClick={onDelete}
         aria-label="delete book"
       >
