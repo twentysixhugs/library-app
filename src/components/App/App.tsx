@@ -29,19 +29,14 @@ const firebaseApp = initializeApp({
 export const db = getFirestore(firebaseApp);
 
 function App() {
-  const [isEditingAnyBook, setIsEditingAnyBook] = useState(false);
   const { user, auth } = useAuth();
-
-  const toggleBookEditMode = function () {
-    setIsEditingAnyBook(!isEditingAnyBook);
-  };
 
   return (
     <div className="App">
       {!!user ? (
         <>
           <Header shouldShowInterface={true}>
-            {isEditingAnyBook || <NewBookForm userId={user.uid} />}
+            <NewBookForm userId={user.uid} />
             <UserAuth
               auth={auth}
               user={user}
@@ -49,7 +44,7 @@ function App() {
             />
           </Header>
           <div className="wrapper wrapper--app">
-            <Library userId={user.uid} onBookEdit={toggleBookEditMode} />
+            <Library userId={user.uid} />
           </div>
         </>
       ) : (

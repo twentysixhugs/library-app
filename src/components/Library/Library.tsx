@@ -7,13 +7,7 @@ import { db } from '../App/App';
 
 import './Library.css';
 
-export default function Library({
-  onBookEdit,
-  userId,
-}: {
-  onBookEdit: () => void;
-  userId: string;
-}) {
+export default function Library({ userId }: { userId: string }) {
   const booksQuery = query(
     collection(db, userId),
     orderBy('timestamp', 'desc'),
@@ -33,7 +27,6 @@ export default function Library({
               <Book
                 name={bookData.name}
                 author={bookData.author}
-                onEdit={onBookEdit}
                 key={doc.id}
                 id={doc.id}
                 userId={userId}

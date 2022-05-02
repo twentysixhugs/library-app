@@ -3,18 +3,19 @@ import { useState } from 'react';
 import { db } from '../App/App';
 import { IBook } from '../App/App';
 
+import './Book.css';
+import BookButtons from './BookButtons';
+
 export default function Book({
   name,
   author,
   id,
   userId,
-  onEdit,
 }: {
   name: string;
   author: string;
   id: string;
   userId: string;
-  onEdit: () => void;
 }) {
   const [isEdited, setIsEdited] = useState(false);
   const [inputOnEdit, setInputOnEdit] = useState<IBook>({ name, author });
@@ -49,7 +50,6 @@ export default function Book({
   };
 
   const toggleEditMode = function () {
-    onEdit(); // signal to app's ui that edit mode has been toggled
     setIsEdited(!isEdited);
   };
 
@@ -105,30 +105,12 @@ export default function Book({
       ) : (
         <span className="c-book__author">{author}</span>
       )}
-      <button
-        className="c-book__delete"
-        onClick={handleDelete}
-        aria-label="delete book"
-      >
-        Delete
-      </button>
-      {isEdited ? (
-        <button
-          className="c-book__edit-submit"
-          onClick={handleEditSubmit}
-          aria-label="finish editing and submit"
-        >
-          Done
-        </button>
-      ) : (
-        <button
-          className="c-book__edit"
-          onClick={() => toggleEditMode()}
-          aria-label="edit book"
-        >
-          Edit
-        </button>
-      )}
+      <BookButtons
+        onEdit={toggleEditMode}
+        onDelete={handleDelete}
+        onEditDone={handleEditSubmit}
+        isEdited={isEdited}
+      />
     </div>
   );
 }

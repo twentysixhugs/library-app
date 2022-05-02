@@ -12,7 +12,6 @@ describe('Book name and author', () => {
       <Book
         name={'testname'}
         author={mockString}
-        onEdit={onEdit}
         id={mockString}
         userId={mockString}
       />,
@@ -26,7 +25,6 @@ describe('Book name and author', () => {
       <Book
         name={mockString}
         author={'testauthor'}
-        onEdit={onEdit}
         id={mockString}
         userId={mockString}
       />,
@@ -42,7 +40,6 @@ describe('Book name and author', () => {
       <Book
         name={name}
         author={author}
-        onEdit={onEdit}
         id={mockString}
         userId={mockString}
       />,
@@ -60,14 +57,12 @@ describe('Book name and author', () => {
 
 describe('Book data manipulation calls', () => {
   const mockString = '1';
-  const onEdit = jest.fn();
 
   it('should call book deletion in API', () => {
     render(
       <Book
         name={'testname'}
         author={mockString}
-        onEdit={onEdit}
         id={mockString}
         userId={mockString}
       />,
@@ -83,7 +78,6 @@ describe('Book data manipulation calls', () => {
       <Book
         name={'testname'}
         author={mockString}
-        onEdit={onEdit}
         id={mockString}
         userId={mockString}
       />,
@@ -104,7 +98,6 @@ describe('Book data manipulation calls', () => {
       <Book
         name={'testname'}
         author={mockString}
-        onEdit={onEdit}
         id={mockString}
         userId={mockString}
       />,
