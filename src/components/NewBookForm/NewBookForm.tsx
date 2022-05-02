@@ -43,7 +43,11 @@ export default function NewBookForm({ userId }: { userId: string }) {
   return (
     <form className="c-form">
       <h1 className="c-form__heading">New book</h1>
-      <label id="c-form__name-label" htmlFor="name">
+      <label
+        className="c-form__label"
+        id="c-form__name-label"
+        htmlFor="name"
+      >
         Name
       </label>
       <input
@@ -53,8 +57,13 @@ export default function NewBookForm({ userId }: { userId: string }) {
         value={newBookInput.name}
         onChange={handleInputChange}
         aria-labelledby="c-form__name-label"
+        autoComplete="off"
       ></input>
-      <label id="c-form__author-label" htmlFor="author">
+      <label
+        className="c-form__label"
+        id="c-form__author-label"
+        htmlFor="author"
+      >
         Author
       </label>
       <input
@@ -64,13 +73,17 @@ export default function NewBookForm({ userId }: { userId: string }) {
         value={newBookInput.author}
         onChange={handleInputChange}
         aria-labelledby="c-form__author-label"
+        autoComplete="off"
       ></input>
-      <button
-        className="c-form__submit"
-        onClick={handleBookAdd(newBookInput.name, newBookInput.author)}
-      >
-        Add
-      </button>
+      <div className="wrapper wrapper--add-book">
+        <button
+          className="c-form__submit"
+          onClick={handleBookAdd(newBookInput.name, newBookInput.author)}
+          aria-label="add book to library"
+        >
+          Add
+        </button>
+      </div>
     </form>
   );
 }

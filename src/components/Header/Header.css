@@ -1,6 +1,28 @@
 .c-header {
   min-height: 150px;
+  padding: 30px 20px;
+
   display: flex;
   justify-content: space-between;
-  border: 2px solid black;
+
+  background: rgb(24, 24, 24);
+}
+
+@media (min-width: 1100px) {
+  .c-header {
+    padding-right: 100px;
+  }
+}
+
+@media (max-width: 700px) {
+  .c-header {
+    padding: 15px;
+    flex-flow: column-reverse;
+  }
+}
+
+@media (max-width: 500px) {
+  .c-header {
+    padding: 10px;
+  }
 }

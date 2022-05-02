@@ -1,5 +1,6 @@
 import { Auth, User } from 'firebase/auth';
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import './UserAuth.css';
 
 export default function UserAuth({
   user,
@@ -22,12 +23,9 @@ export default function UserAuth({
     };
   return (
     <div className="c-user-auth">
-      <button onClick={handleClick} className="c-user-auth">
-        {user ? 'Sign out' : 'Sign in'}
-      </button>
       {shouldRenderUserInfo && (
         <div className="c-user-auth__user-info">
-          {auth.currentUser && auth.currentUser.displayName}
+          <span>{auth.currentUser && auth.currentUser.displayName}</span>
           {auth.currentUser && (
             <img
               className="c-user-auth__profile-pic"
@@ -37,6 +35,9 @@ export default function UserAuth({
           )}
         </div>
       )}
+      <button onClick={handleClick} className="c-user-auth__button">
+        {user ? 'Sign out' : 'Sign in'}
+      </button>
     </div>
   );
 }

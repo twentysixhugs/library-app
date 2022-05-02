@@ -1,0 +1,76 @@
+.c-user-auth {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.c-user-auth__user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.c-user-auth__user-info span {
+  color: rgb(140, 140, 140);
+}
+
+.c-user-auth__profile-pic {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 100%;
+}
+
+.c-user-auth__button {
+  width: max-content;
+  padding: 10px;
+
+  border-radius: 4px;
+  background: rgb(224, 224, 224);
+}
+
+.c-header .c-user-auth__button {
+  background: rgb(255, 180, 140);
+  padding-block: 8px;
+  transition: background 0.3s, transform 0.1s;
+}
+
+.c-header .c-user-auth__button:hover {
+  background: rgb(255, 160, 109);
+}
+
+.c-header .c-user-auth__button:active {
+  transform: scale(1.1);
+}
+
+@media (min-width: 700px) {
+  .c-header .c-user-auth {
+    height: 100px;
+  }
+}
+
+@media (max-width: 700px) {
+  .c-header .c-user-auth {
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 500px) {
+  .c-user-auth {
+    margin-bottom: 10px;
+  }
+  .c-header .c-user-auth {
+    gap: 8px;
+  }
+  .c-header .c-user-auth__button {
+    width: max-content;
+    padding: 5px;
+    background: none;
+    color: rgb(255, 160, 109);
+    text-decoration: underline;
+  }
+
+  .c-header .c-user-auth__button:hover {
+    background: none;
+  }
+}

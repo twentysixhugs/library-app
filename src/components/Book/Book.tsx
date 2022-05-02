@@ -105,15 +105,27 @@ export default function Book({
       ) : (
         <span className="c-book__author">{author}</span>
       )}
-      <button className="c-book__delete" onClick={handleDelete}>
+      <button
+        className="c-book__delete"
+        onClick={handleDelete}
+        aria-label="delete book"
+      >
         Delete
       </button>
       {isEdited ? (
-        <button className="c-book__edit-submit" onClick={handleEditSubmit}>
+        <button
+          className="c-book__edit-submit"
+          onClick={handleEditSubmit}
+          aria-label="finish editing and submit"
+        >
           Done
         </button>
       ) : (
-        <button className="c-book__edit" onClick={() => toggleEditMode()}>
+        <button
+          className="c-book__edit"
+          onClick={() => toggleEditMode()}
+          aria-label="edit book"
+        >
           Edit
         </button>
       )}

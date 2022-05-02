@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default function BookData({
+export default function BooksList({
   children,
 }: {
   children?: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return <div className="c-books-list">{children}</div>;
 }
