@@ -2,13 +2,6 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import NewBookForm from '../NewBookForm';
 
-jest.mock('firebase/firestore', () => ({
-  __esModule: true,
-  collection: jest.fn(),
-  addDoc: jest.fn(),
-  getFirestore: jest.fn(),
-}));
-
 describe('Book add', () => {
   it('clears input fields when a new book is added', () => {
     render(<NewBookForm userId={'1'} />);

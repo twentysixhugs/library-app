@@ -1,13 +1,6 @@
 import { screen, render } from '@testing-library/react';
 import Library from '../Library';
 
-jest.mock('firebase/firestore', () => ({
-  __esModule: true,
-  collection: jest.fn(),
-  query: jest.fn(),
-  getFirestore: jest.fn(),
-}));
-
 const mockBooksSnapshot = {
   docs: [
     {

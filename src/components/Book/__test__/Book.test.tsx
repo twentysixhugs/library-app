@@ -4,19 +4,6 @@ import Book from '../Book';
 import { deleteDoc, updateDoc } from 'firebase/firestore';
 import { waitForElementToBeRemoved } from '@testing-library/react';
 
-jest.mock('firebase/firestore', () => ({
-  __esModule: true,
-  ...jest.requireActual('firebase/firestore'),
-  doc: jest.fn(),
-  updateDoc: jest.fn(),
-  deleteDoc: jest.fn(),
-  getFirestore: jest.fn(),
-}));
-
-beforeEach(() => {
-  jest.resetModules();
-});
-
 describe('Book name and author', () => {
   const onEdit = jest.fn(); /* Mock app's response to book edit */
   const mockString = '1';
