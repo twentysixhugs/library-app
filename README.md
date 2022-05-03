@@ -1,6 +1,6 @@
 # Library App
 ## [Live preview](https://newlibrary-5811a.web.app/)
-- A book library app where you can add, remove and update books.
+- A library app where you can add, remove and update books.
 
 ## Key features
 - Authentication
