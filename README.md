@@ -5,7 +5,7 @@
 ## Key features
 - Users can add, remove and update books.
 - Authentication with Google Auth
-- User data is stored on a Firebase backend
+- User data is stored on a Firebase backend, so it can be accessed from multiple devices.
 
 ### Credits
 
